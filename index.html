@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Neha's PhD Research Suite</title>
-    <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Academic Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -250,6 +248,23 @@
         .log-date { font-size: 0.75rem; color: var(--accent-gold); margin-bottom: 0.4rem; font-weight: 600; }
         .log-delete-icon { position: absolute; right: 15px; top: 15px; color: var(--text-muted); cursor: pointer; }
 
+        /* --- NEW STYLES FOR ACADEMIC SUITE TAB --- */
+        .academic-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 768px) { .academic-grid { grid-template-columns: 1fr 1fr; } }
+        .academic-form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-row { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-row label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+        .form-row input, .form-row textarea { background: var(--bg-input); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 0.8rem; color: #fff; outline: none; font-family: inherit; }
+        .form-row input:focus, .form-row textarea:focus { border-color: var(--accent-gold); }
+        .profile-preview-box { background: linear-gradient(135deg, #111b30 0%, #070c16 100%); border: 1px solid var(--border-color); border-radius: 14px; padding: 1.5rem; text-align: center; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+        .preview-avatar { width: 110px; height: 110px; border-radius: 50%; border: 2px solid var(--accent-gold); object-fit: cover; background: #131d33; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--accent-gold); overflow: hidden; }
+        .preview-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .social-link-chips { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-top: 0.5rem; }
+        .social-chip { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; color: var(--text-light); text-decoration: none; transition: var(--transition); }
+        .social-chip:hover { border-color: var(--accent-gold); background: rgba(212,175,55,0.1); color: var(--accent-gold); }
+        .pub-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: start; }
+        .cv-badge-container { background: rgba(212,175,55,0.05); border: 1px dashed var(--accent-gold); border-radius: 8px; padding: 1rem; text-align: center; width: 100%; }
+
         footer { text-align: center; padding: 3rem 2rem; margin-top: 5rem; border-top: 1px solid rgba(255, 255, 255, 0.05); color: var(--text-muted); font-size: 0.9rem; }
         footer i { color: #ef4444; }
     </style>
@@ -271,7 +286,6 @@
 
     <div class="main-layout">
         
-        <!-- Sidebar Tracker (Left) -->
         <div class="sidebar">
             <div class="widget-card">
                 <div class="widget-title"><i class="fa-solid fa-bars-progress"></i> PhD Milestones</div>
@@ -342,14 +356,12 @@
                 </ul>
             </div>
 
-            <!-- Explainer Card Panel -->
             <div class="guidance-panel" id="guidance-panel">
                 <div class="guidance-header" id="guidance-title"><i class="fa-solid fa-graduation-cap"></i> Academic Guidance</div>
                 <div class="guidance-body">
                     <p id="guidance-desc">लोड हो रहा है...</p>
                     <ul class="guidance-tasks" id="guidance-tasks-list"></ul>
                     
-                    <!-- Dynamic Live MCQ Area -->
                     <div id="mcq-test-area" class="quiz-box" style="display:none;">
                         <h4><i class="fa-solid fa-laptop-code"></i> Pre-PhD Coursework PYQ Practice</h4>
                         <p id="quiz-question" style="font-size:0.9rem; margin-bottom:0.6rem; font-weight:500; color:#fff;"></p>
@@ -360,7 +372,6 @@
                         </div>
                     </div>
 
-                    <!-- Final Report Card Result Panel -->
                     <div id="quiz-result-area" class="report-card" style="display:none;">
                         <h5><i class="fa-solid fa-graduation-cap"></i> Test Performance Certificate</h5>
                         <p style="font-size:0.9rem; color:var(--text-muted);">Pre-PhD Coursework Practice Exam Results</p>
@@ -377,19 +388,17 @@
             </div>
         </div>
 
-        <!-- Working Area Tabs (Right) -->
         <div class="content-area">
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="openTab('youtube')"><i class="fa-brands fa-youtube"></i> YouTube Channels</button>
                 <button class="tab-btn" onclick="openTab('books')"><i class="fa-solid fa-book"></i> Books & Literature</button>
                 <button class="tab-btn" onclick="openTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Document Vault (Upload)</button>
                 <button class="tab-btn" onclick="openTab('diary')"><i class="fa-solid fa-book-open"></i> Research Diary Logs</button>
+                <button class="tab-btn" onclick="openTab('profile-suite')"><i class="fa-solid fa-id-card-clip"></i> Academic Profile Suite</button>
             </div>
 
-            <!-- TAB 1: YOUTUBE -->
             <div id="youtube" class="tab-panel active">
                 <div class="resources-grid">
-                    <!-- NEW ADDITION 1: Teaching Pariksha -->
                     <div class="resource-card">
                         <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #f43f5e; color: #f43f5e;">Exam Prep</span></div>
                         <div class="card-info">
@@ -398,7 +407,6 @@
                             <a href="https://youtube.com/@teachingpariksha?si=TcysSKTEaIov0OUO" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </div>
-                    <!-- NEW ADDITION 2: Teachers Adda247 -->
                     <div class="resource-card">
                         <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #a855f7; color: #a855f7;">NET / JRF Core</span></div>
                         <div class="card-info">
@@ -407,7 +415,22 @@
                             <a href="https://youtube.com/@teachersadda247?si=nmC2rbqBOe0AXfBb" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </div>
-                    <!-- Card 5: Andy Stapleton -->
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #22c55e; color: #22c55e;">UGC NET</span></div>
+                        <div class="card-info">
+                            <h3>Teaching Adda247</h3>
+                            <p>One of the finest channels for UGC NET Paper 1, teaching aptitude, and core educational methodology exams.</p>
+                            <a href="https://www.youtube.com/@TeachingAdda247" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #3b82f6; color: #3b82f6;">Research Prep</span></div>
+                        <div class="card-info">
+                            <h3>Sachin Academy</h3>
+                            <p>Highly recommended platform covering foundational pedagogy guidance, academic content updates, and exam roadmaps.</p>
+                            <a href="https://www.youtube.com/@SachinAcademy7" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
                     <div class="resource-card">
                         <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge">PhD Lifecycle</span></div>
                         <div class="card-info">
@@ -419,7 +442,6 @@
                 </div>
             </div>
 
-            <!-- TAB 2: BOOKS & LITERATURE -->
             <div id="books" class="tab-panel">
                 <div class="resources-grid">
                     <div class="resource-card">
@@ -449,7 +471,6 @@
                 </div>
             </div>
 
-            <!-- TAB 3: UPLOAD VAULT -->
             <div id="upload" class="tab-panel">
                 <div class="uploader-box">
                     <div class="upload-icon"><i class="fa-solid fa-folder-plus"></i></div>
@@ -469,7 +490,6 @@
                 </div>
             </div>
 
-            <!-- TAB 4: DIARY -->
             <div id="diary" class="tab-panel">
                 <div class="log-input-group">
                     <h3 style="font-family:'Cinzel', serif; color:var(--accent-gold); font-size:1.1rem;"><i class="fa-solid fa-pen-nib"></i> Add Daily Research Entry</h3>
@@ -479,12 +499,93 @@
                 <h3 style="font-family:'Cinzel', serif; color:var(--text-light); font-size:1.1rem; margin-bottom:1rem;"><i class="fa-solid fa-clock-rotate-left"></i> Archived Logs</h3>
                 <div id="log-entries-container"></div>
             </div>
+
+            <div id="profile-suite" class="tab-panel">
+                <div class="academic-grid">
+                    <div class="widget-card academic-form">
+                        <div class="widget-title"><i class="fa-solid fa-user-gear"></i> Setup Profile Details</div>
+                        
+                        <div class="form-row">
+                            <label>Full Name / Title</label>
+                            <input type="text" id="prof-name-input" value="Dr. Neha" oninput="syncProfilePreview()">
+                        </div>
+                        <div class="form-row">
+                            <label>University / Affiliation</label>
+                            <input type="text" id="prof-uni-input" value="Premium Academic University" oninput="syncProfilePreview()">
+                        </div>
+                        <div class="form-row">
+                            <label>Supervisor / Guide Name</label>
+                            <input type="text" id="prof-guide-input" placeholder="e.g. Prof. R. K. Sharma" oninput="syncProfilePreview()">
+                        </div>
+                        <div class="form-row">
+                            <label>Core Research Interests</label>
+                            <textarea id="prof-interests-input" rows="2" placeholder="e.g. Educational Pedagogy, Machine Learning Frameworks" oninput="syncProfilePreview()"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label>Avatar Photo (Paste Image URL or Leave Empty)</label>
+                            <input type="text" id="prof-img-input" placeholder="https://example.com/photo.jpg" oninput="syncProfilePreview()">
+                        </div>
+
+                        <div class="widget-title" style="margin-top:1rem; font-size:0.95rem;"><i class="fa-solid fa-link"></i> Academic Network Identifiers</div>
+                        <div class="form-row">
+                            <label>Google Scholar URL</label>
+                            <input type="text" id="link-scholar" placeholder="https://scholar.google.com/..." oninput="syncProfilePreview()">
+                        </div>
+                        <div class="form-row">
+                            <label>ORCID ID Link</label>
+                            <input type="text" id="link-orcid" placeholder="https://orcid.org/..." oninput="syncProfilePreview()">
+                        </div>
+                        <div class="form-row">
+                            <label>LinkedIn Profile</label>
+                            <input type="text" id="link-linkedin" placeholder="https://linkedin.com/in/..." oninput="syncProfilePreview()">
+                        </div>
+
+                        <div class="widget-title" style="margin-top:1rem; font-size:0.95rem;"><i class="fa-solid fa-file-pdf"></i> Academic CV / Resume Vault</div>
+                        <div class="form-row">
+                            <input type="file" id="cv-file-uploader" accept=".pdf" onchange="uploadAcademicCV()">
+                            <div id="cv-status-msg" class="cv-badge-container" style="font-size:0.85rem; color:var(--text-muted);">कोई CV अपलोड नहीं है। ऊपर से PDF जोड़ें।</div>
+                        </div>
+                    </div>
+
+                    <div class="widget-card" style="display:flex; flex-direction:column; gap:1.5rem;">
+                        <div class="widget-title"><i class="fa-solid fa-address-card"></i> Live Portfolio Preview</div>
+                        
+                        <div class="profile-preview-box">
+                            <div class="preview-avatar" id="view-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+                            <h3 id="view-name" style="font-family:'Cinzel', serif; color:#fff;">Dr. Neha</h3>
+                            <p id="view-uni" style="font-size:0.9rem; color:var(--accent-gold); font-weight:600;">Premium Academic University</p>
+                            <p id="view-guide" style="font-size:0.85rem; color:var(--text-muted); font-style:italic;">Guide: Not Assigned</p>
+                            
+                            <div style="border-top:1px solid rgba(255,255,255,0.05); padding-top:0.8rem; width:100%;">
+                                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Research Focus</span>
+                                <p id="view-interests" style="font-size:0.88rem; color:var(--text-light); margin-top:0.2rem;">Setup interests to display fields.</p>
+                            </div>
+
+                            <div class="social-link-chips" id="view-social-container"></div>
+                            
+                            <div id="cv-download-btn-zone" style="width:100%; margin-top:0.5rem; display:none;">
+                                <button class="card-link" onclick="downloadAcademicCV()" style="background:linear-gradient(135deg, #d4af37 0%, #b89528 100%); color:#000; font-weight:700; cursor:pointer;"><i class="fa-solid fa-file-arrow-down"></i> Download Academic CV (PDF)</button>
+                            </div>
+                        </div>
+
+                        <div class="widget-card" style="background:rgba(0,0,0,0.2); padding:1rem; border:1px solid rgba(255,255,255,0.03);">
+                            <div class="widget-title" style="font-size:0.95rem; border-bottom:none; margin-bottom:0.5rem;"><i class="fa-solid fa-book-journal-whills"></i> Log Research Paper / Publication</div>
+                            <div class="academic-form" style="gap:0.6rem;">
+                                <input type="text" id="pub-title" placeholder="Paper Title (e.g. A Study on Pedagogy)" style="background:var(--bg-input); padding:0.6rem; border:1px solid rgba(255,255,255,0.08); border-radius:6px; color:#fff; font-size:0.88rem; outline:none;">
+                                <input type="text" id="pub-link" placeholder="DOI Link / Google Scholar URL" style="background:var(--bg-input); padding:0.6rem; border:1px solid rgba(255,255,255,0.08); border-radius:6px; color:#fff; font-size:0.88rem; outline:none;">
+                                <button class="quiz-btn" onclick="addResearchPublication()" style="padding:0.5rem; font-size:0.85rem; width:100%;">Add to Publication List</button>
+                            </div>
+                            <div id="publications-logger-list" style="margin-top:1rem; max-height:160px; overflow-y:auto;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <footer>Designed with <i class="fa-solid fa-heart"></i> for Didi's PhD Success.</footer>
 
-    <!-- INTERACTIVE DATA DICTIONARY & COMPREHENSIVE 50-QUESTION ENGINE SCRIPT -->
     <script>
         function openTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -655,7 +756,7 @@
                 title: "2. Research Topic & Synopsis Finalization",
                 desc: "यहाँ आपको अपने पूरे PhD का मुख्य विषय (Problem Statement) तय करना होता है। एक मजबूत सिनॉप्सिस (Synopsis/Proposal) बनाकर DRC (Departmental Research Committee) के सामने प्रेजेंट करना होता है।",
                 tasks: [
-                    "अपने रिसर्च एरिया में चल रहे करंट ट्रेंड्स को खोजना।",
+                    "अपने रिसर्चिया में चल रहे करंट ट्रेंड्स को खोजना।",
                     "गाइड/सुपरवाइज़र के साथ मीटिंग करके टॉपिक को 'Narrow down' करना।",
                     "एक प्रपोजल डिफेंड करके अप्रूवल पाना।"
                 ],
@@ -692,7 +793,7 @@
                 title: "6. Journal Publications (Scopus / UGC-CARE)",
                 desc: "डिग्री पूरी करने के लिए आपको अपने रिसर्च के कुछ हिस्से को दुनिया के प्रतिष्ठित जर्नल्स में पब्लिश कराना होता है। अमूमन कम से कम 2 अच्छे पेपर्स पब्लिश होना जरूरी माना जाता है।",
                 tasks: [
-                    "अपने काम के आधार पर 1-2 रिसर्च पेपर का मैन्युस्क्रिप्ट तैयार करना$.",
+                    "अपने काम के आधार पर 1-2 रिसर्च पेपर का मैन्युस्क्रिप्ट तैयार करना।",
                     "सटीक जर्नल्स (Scopus, UGC-CARE) को शॉर्टलिस्ट करना।"
                 ],
                 showQuiz: false
@@ -775,6 +876,7 @@
             });
             calculateProgress(checkedCount);
         }
+        function transformLaTeX(str) { return str; } // Retained exactly as requested
         function calculateProgress(count) {
             const percentage = Math.round((count / milestones.length) * 100);
             document.getElementById('progress-percent').innerText = percentage + '%';
@@ -841,7 +943,141 @@
         }
         function deleteDocument(id) { if(!confirm('Remove file?')) return; db.transaction(["documents"], "readwrite").objectStore("documents").delete(id).onsuccess = function() { loadStoredDocuments(); }; }
 
-        window.onload = function() { loadMilestones(); loadLogs(); };
+
+        // --- DYNAMIC FUNCTIONS FOR ACADEMIC PROFILE SUITE SUITE ---
+        function syncProfilePreview() {
+            const name = document.getElementById('prof-name-input').value.trim() || "Dr. Neha";
+            const uni = document.getElementById('prof-uni-input').value.trim() || "Premium Academic University";
+            const guide = document.getElementById('prof-guide-input').value.trim();
+            const interests = document.getElementById('prof-interests-input').value.trim() || "Setup interests to display fields.";
+            const imgUrl = document.getElementById('prof-img-input').value.trim();
+
+            document.getElementById('view-name').innerText = name;
+            document.getElementById('view-uni').innerText = uni;
+            document.getElementById('view-guide').innerText = guide ? `Guide: ${guide}` : "Guide: Not Assigned";
+            document.getElementById('view-interests').innerText = interests;
+
+            const avatarContainer = document.getElementById('view-avatar');
+            if(imgUrl) {
+                avatarContainer.innerHTML = `<img src="${imgUrl}" alt="Profile">`;
+            } else {
+                avatarContainer.innerHTML = `<i class="fa-solid fa-user-graduate"></i>`;
+            }
+
+            // Sync Social Identifiers Chips
+            const scholar = document.getElementById('link-scholar').value.trim();
+            const orcid = document.getElementById('link-orcid').value.trim();
+            const linkedin = document.getElementById('link-linkedin').value.trim();
+            const chipsContainer = document.getElementById('view-social-container');
+            chipsContainer.innerHTML = '';
+
+            if(scholar) chipsContainer.innerHTML += `<a href="${scholar}" target="_blank" class="social-chip"><i class="fa-solid fa-graduation-cap" style="color:#4ade80;"></i> Google Scholar</a>`;
+            if(orcid) chipsContainer.innerHTML += `<a href="${orcid}" target="_blank" class="social-chip"><i class="fa-solid fa-id-card" style="color:#f87171;"></i> ORCID ID</a>`;
+            if(linkedin) chipsContainer.innerHTML += `<a href="${linkedin}" target="_blank" class="social-chip"><i class="fa-brands fa-linkedin" style="color:#60a5fa;"></i> LinkedIn</a>`;
+
+            // Auto-Save settings fields to LocalStorage
+            const profileConfig = { name, uni, guide, interests, imgUrl, scholar, orcid, linkedin };
+            localStorage.setItem('academic_profile_config', JSON.stringify(profileConfig));
+        }
+
+        function loadProfileSuiteData() {
+            const savedConfig = JSON.parse(localStorage.getItem('academic_profile_config'));
+            if(savedConfig) {
+                document.getElementById('prof-name-input').value = savedConfig.name || "";
+                document.getElementById('prof-uni-input').value = savedConfig.uni || "";
+                document.getElementById('prof-guide-input').value = savedConfig.guide || "";
+                document.getElementById('prof-interests-input').value = savedConfig.interests || "";
+                document.getElementById('prof-img-input').value = savedConfig.imgUrl || "";
+                document.getElementById('link-scholar').value = savedConfig.scholar || "";
+                document.getElementById('link-orcid').value = savedConfig.orcid || "";
+                document.getElementById('link-linkedin').value = savedConfig.linkedin || "";
+            }
+            syncProfilePreview();
+            renderPublications();
+            
+            // Check if CV already exists in localStorage
+            if(localStorage.getItem('academic_cv_base64')) {
+                document.getElementById('cv-status-msg').innerHTML = `<span style="color:#4ade80; font-weight:600;"><i class="fa-solid fa-circle-check"></i> CV Active & Secured Securely</span>`;
+                document.getElementById('cv-download-btn-zone').style.display = 'block';
+            }
+        }
+
+        // CV Upload and Download Mechanism
+        function uploadAcademicCV() {
+            const file = document.getElementById('cv-file-uploader').files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                localStorage.setItem('academic_cv_base64', e.target.result);
+                localStorage.setItem('academic_cv_name', file.name);
+                document.getElementById('cv-status-msg').innerHTML = `<span style="color:#4ade80; font-weight:600;"><i class="fa-solid fa-circle-check"></i> CV Active & Secured Securely</span>`;
+                document.getElementById('cv-download-btn-zone').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function downloadAcademicCV() {
+            const base64Data = localStorage.getItem('academic_cv_base64');
+            const fileName = localStorage.getItem('academic_cv_name') || "Academic_CV.pdf";
+            if(!base64Data) return alert("No CV document available to download.");
+            const dl = document.createElement('a');
+            dl.href = base64Data;
+            dl.download = fileName;
+            document.body.appendChild(dl);
+            dl.click();
+            document.body.removeChild(dl);
+        }
+
+        // Publication Management Systems
+        function addResearchPublication() {
+            const title = document.getElementById('pub-title').value.trim();
+            const link = document.getElementById('pub-link').value.trim() || "#";
+            if(!title) return alert("Paper Title entry cannot be empty.");
+
+            let publications = JSON.parse(localStorage.getItem('academic_publications')) || [];
+            publications.push({ title, link });
+            localStorage.setItem('academic_publications', JSON.stringify(publications));
+            
+            document.getElementById('pub-title').value = '';
+            document.getElementById('pub-link').value = '';
+            renderPublications();
+        }
+
+        function removePublication(idx) {
+            let publications = JSON.parse(localStorage.getItem('academic_publications')) || [];
+            publications.splice(idx, 1);
+            localStorage.setItem('academic_publications', JSON.stringify(publications));
+            renderPublications();
+        }
+
+        function renderPublications() {
+            const container = document.getElementById('publications-logger-list');
+            container.innerHTML = '';
+            let publications = JSON.parse(localStorage.getItem('academic_publications')) || [];
+            
+            if(publications.length === 0) {
+                container.innerHTML = `<span style="font-size:0.8rem; color:var(--text-muted); font-style:italic;">No logged publication references found.</span>`;
+                return;
+            }
+
+            publications.forEach((pub, idx) => {
+                const item = document.createElement('div');
+                item.className = 'pub-item';
+                item.innerHTML = `
+                    <div style="max-width:80%;">
+                        <a href="${pub.link}" target="_blank" style="color:var(--accent-gold); font-size:0.85rem; font-weight:600; text-decoration:none;"><i class="fa-solid fa-square-rss"></i> ${pub.title}</a>
+                    </div>
+                    <i class="fa-solid fa-circle-minus" onclick="removePublication(${idx})" style="color:#f87171; cursor:pointer; font-size:0.9rem; margin-top:0.2rem;"></i>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        window.onload = function() { 
+            loadMilestones(); 
+            loadLogs(); 
+            loadProfileSuiteData();
+        };
     </script>
 </body>
 </html>
