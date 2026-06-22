@@ -2,11 +2,13 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1200, initial-scale=0.3">
     <title>Dr. Neha's PhD Research Suite</title>
+    <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Academic Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -34,7 +36,8 @@
             background-color: var(--bg-dark);
             color: var(--text-light);
             line-height: 1.6;
-            overflow-x: hidden;
+            min-width: 1350px; /* मोबाइल पर डेस्कटॉप लेआउट फोर्स करने के लिए */
+            overflow-x: auto;
         }
 
         /* --- Header Section --- */
@@ -103,12 +106,8 @@
             margin: 2.5rem auto;
             padding: 0 2rem;
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 360px 1fr; /* मोबाइल और डेस्कटॉप दोनों पर हमेशा 2 कॉलम रहेंगे */
             gap: 2.5rem;
-        }
-
-        @media (min-width: 1024px) {
-            .main-layout { grid-template-columns: 360px 1fr; }
         }
 
         .sidebar { display: flex; flex-direction: column; gap: 2rem; }
@@ -201,8 +200,8 @@
 
         /* --- Tabs & Grid Setup --- */
         .content-area { display: flex; flex-direction: column; gap: 2rem; }
-        .nav-tabs { display: flex; gap: 0.75rem; background: var(--bg-card); padding: 0.5rem; border-radius: 12px; flex-wrap: wrap; }
-        .tab-btn { background: transparent; border: none; color: var(--text-muted); padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 500; border-radius: 8px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 0.6rem; }
+        .nav-tabs { display: flex; gap: 0.75rem; background: var(--bg-card); padding: 0.5rem; border-radius: 12px; flex-wrap: nowrap; overflow-x: auto; }
+        .tab-btn { background: transparent; border: none; color: var(--text-muted); padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 500; border-radius: 8px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 0.6rem; white-space: nowrap; }
         .tab-btn.active { background: var(--bg-input); color: var(--accent-gold); box-shadow: inset 0 0 0 1px var(--border-color); }
         .tab-panel { display: none; }
         .tab-panel.active { display: block; animation: slideUp 0.4s ease forwards; }
@@ -210,7 +209,7 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .resources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } /* हमेशा 3 कॉलम ग्रिड रहेगा */
         .resource-card { background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 14px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition); }
         .resource-card:hover { transform: translateY(-4px); border-color: var(--border-color); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); }
         .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
@@ -248,9 +247,8 @@
         .log-date { font-size: 0.75rem; color: var(--accent-gold); margin-bottom: 0.4rem; font-weight: 600; }
         .log-delete-icon { position: absolute; right: 15px; top: 15px; color: var(--text-muted); cursor: pointer; }
 
-        /* --- NEW STYLES FOR ACADEMIC SUITE TAB --- */
-        .academic-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 768px) { .academic-grid { grid-template-columns: 1fr 1fr; } }
+        /* --- STYLES FOR ACADEMIC SUITE TAB --- */
+        .academic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; } /* साइड-बाय-साइड 2 कॉलम हमेशा */
         .academic-form { display: flex; flex-direction: column; gap: 1rem; }
         .form-row { display: flex; flex-direction: column; gap: 0.4rem; }
         .form-row label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
@@ -286,6 +284,7 @@
 
     <div class="main-layout">
         
+        <!-- Sidebar Tracker (Left) -->
         <div class="sidebar">
             <div class="widget-card">
                 <div class="widget-title"><i class="fa-solid fa-bars-progress"></i> PhD Milestones</div>
@@ -356,12 +355,14 @@
                 </ul>
             </div>
 
+            <!-- Explainer Card Panel -->
             <div class="guidance-panel" id="guidance-panel">
                 <div class="guidance-header" id="guidance-title"><i class="fa-solid fa-graduation-cap"></i> Academic Guidance</div>
                 <div class="guidance-body">
                     <p id="guidance-desc">लोड हो रहा है...</p>
                     <ul class="guidance-tasks" id="guidance-tasks-list"></ul>
                     
+                    <!-- Dynamic Live MCQ Area -->
                     <div id="mcq-test-area" class="quiz-box" style="display:none;">
                         <h4><i class="fa-solid fa-laptop-code"></i> Pre-PhD Coursework PYQ Practice</h4>
                         <p id="quiz-question" style="font-size:0.9rem; margin-bottom:0.6rem; font-weight:500; color:#fff;"></p>
@@ -372,6 +373,7 @@
                         </div>
                     </div>
 
+                    <!-- Final Report Card Result Panel -->
                     <div id="quiz-result-area" class="report-card" style="display:none;">
                         <h5><i class="fa-solid fa-graduation-cap"></i> Test Performance Certificate</h5>
                         <p style="font-size:0.9rem; color:var(--text-muted);">Pre-PhD Coursework Practice Exam Results</p>
@@ -388,6 +390,7 @@
             </div>
         </div>
 
+        <!-- Working Area Tabs (Right) -->
         <div class="content-area">
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="openTab('youtube')"><i class="fa-brands fa-youtube"></i> YouTube Channels</button>
@@ -397,8 +400,10 @@
                 <button class="tab-btn" onclick="openTab('profile-suite')"><i class="fa-solid fa-id-card-clip"></i> Academic Profile Suite</button>
             </div>
 
+            <!-- TAB 1: YOUTUBE -->
             <div id="youtube" class="tab-panel active">
                 <div class="resources-grid">
+                    <!-- NEW ADDITION 1: Teaching Pariksha -->
                     <div class="resource-card">
                         <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #f43f5e; color: #f43f5e;">Exam Prep</span></div>
                         <div class="card-info">
@@ -407,6 +412,7 @@
                             <a href="https://youtube.com/@teachingpariksha?si=TcysSKTEaIov0OUO" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </div>
+                    <!-- NEW ADDITION 2: Teachers Adda247 -->
                     <div class="resource-card">
                         <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #a855f7; color: #a855f7;">NET / JRF Core</span></div>
                         <div class="card-info">
@@ -415,22 +421,7 @@
                             <a href="https://youtube.com/@teachersadda247?si=nmC2rbqBOe0AXfBb" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </div>
-                    <div class="resource-card">
-                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #22c55e; color: #22c55e;">UGC NET</span></div>
-                        <div class="card-info">
-                            <h3>Teaching Adda247</h3>
-                            <p>One of the finest channels for UGC NET Paper 1, teaching aptitude, and core educational methodology exams.</p>
-                            <a href="https://www.youtube.com/@TeachingAdda247" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                        </div>
-                    </div>
-                    <div class="resource-card">
-                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #3b82f6; color: #3b82f6;">Research Prep</span></div>
-                        <div class="card-info">
-                            <h3>Sachin Academy</h3>
-                            <p>Highly recommended platform covering foundational pedagogy guidance, academic content updates, and exam roadmaps.</p>
-                            <a href="https://www.youtube.com/@SachinAcademy7" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                        </div>
-                    </div>
+                    <!-- Card 5: Andy Stapleton -->
                     <div class="resource-card">
                         <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge">PhD Lifecycle</span></div>
                         <div class="card-info">
@@ -442,6 +433,7 @@
                 </div>
             </div>
 
+            <!-- TAB 2: BOOKS & LITERATURE -->
             <div id="books" class="tab-panel">
                 <div class="resources-grid">
                     <div class="resource-card">
@@ -471,6 +463,7 @@
                 </div>
             </div>
 
+            <!-- TAB 3: UPLOAD VAULT -->
             <div id="upload" class="tab-panel">
                 <div class="uploader-box">
                     <div class="upload-icon"><i class="fa-solid fa-folder-plus"></i></div>
@@ -490,6 +483,7 @@
                 </div>
             </div>
 
+            <!-- TAB 4: DIARY -->
             <div id="diary" class="tab-panel">
                 <div class="log-input-group">
                     <h3 style="font-family:'Cinzel', serif; color:var(--accent-gold); font-size:1.1rem;"><i class="fa-solid fa-pen-nib"></i> Add Daily Research Entry</h3>
@@ -500,8 +494,10 @@
                 <div id="log-entries-container"></div>
             </div>
 
+            <!-- TAB 5: ACADEMIC PROFILE SUITE -->
             <div id="profile-suite" class="tab-panel">
                 <div class="academic-grid">
+                    <!-- Column 1: Config Form -->
                     <div class="widget-card academic-form">
                         <div class="widget-title"><i class="fa-solid fa-user-gear"></i> Setup Profile Details</div>
                         
@@ -526,6 +522,7 @@
                             <input type="text" id="prof-img-input" placeholder="https://example.com/photo.jpg" oninput="syncProfilePreview()">
                         </div>
 
+                        <!-- Sub-Section: ID Links -->
                         <div class="widget-title" style="margin-top:1rem; font-size:0.95rem;"><i class="fa-solid fa-link"></i> Academic Network Identifiers</div>
                         <div class="form-row">
                             <label>Google Scholar URL</label>
@@ -540,6 +537,7 @@
                             <input type="text" id="link-linkedin" placeholder="https://linkedin.com/in/..." oninput="syncProfilePreview()">
                         </div>
 
+                        <!-- Sub-Section: CV Upload -->
                         <div class="widget-title" style="margin-top:1rem; font-size:0.95rem;"><i class="fa-solid fa-file-pdf"></i> Academic CV / Resume Vault</div>
                         <div class="form-row">
                             <input type="file" id="cv-file-uploader" accept=".pdf" onchange="uploadAcademicCV()">
@@ -547,6 +545,7 @@
                         </div>
                     </div>
 
+                    <!-- Column 2: Live Digital Portfolio Display -->
                     <div class="widget-card" style="display:flex; flex-direction:column; gap:1.5rem;">
                         <div class="widget-title"><i class="fa-solid fa-address-card"></i> Live Portfolio Preview</div>
                         
@@ -568,6 +567,7 @@
                             </div>
                         </div>
 
+                        <!-- Sub-Section: Live Publication Logger -->
                         <div class="widget-card" style="background:rgba(0,0,0,0.2); padding:1rem; border:1px solid rgba(255,255,255,0.03);">
                             <div class="widget-title" style="font-size:0.95rem; border-bottom:none; margin-bottom:0.5rem;"><i class="fa-solid fa-book-journal-whills"></i> Log Research Paper / Publication</div>
                             <div class="academic-form" style="gap:0.6rem;">
@@ -586,6 +586,7 @@
 
     <footer>Designed with <i class="fa-solid fa-heart"></i> for Didi's PhD Success.</footer>
 
+    <!-- INTERACTIVE DATA DICTIONARY & COMPREHENSIVE 50-QUESTION ENGINE SCRIPT -->
     <script>
         function openTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -756,7 +757,7 @@
                 title: "2. Research Topic & Synopsis Finalization",
                 desc: "यहाँ आपको अपने पूरे PhD का मुख्य विषय (Problem Statement) तय करना होता है। एक मजबूत सिनॉप्सिस (Synopsis/Proposal) बनाकर DRC (Departmental Research Committee) के सामने प्रेजेंट करना होता है।",
                 tasks: [
-                    "अपने रिसर्चिया में चल रहे करंट ट्रेंड्स को खोजना।",
+                    "अपने रिसर्च एरिया में चल रहे करंट ट्रेंड्स को खोजना।",
                     "गाइड/सुपरवाइज़र के साथ मीटिंग करके टॉपिक को 'Narrow down' करना।",
                     "एक प्रपोजल डिफेंड करके अप्रूवल पाना।"
                 ],
@@ -876,7 +877,6 @@
             });
             calculateProgress(checkedCount);
         }
-        function transformLaTeX(str) { return str; } // Retained exactly as requested
         function calculateProgress(count) {
             const percentage = Math.round((count / milestones.length) * 100);
             document.getElementById('progress-percent').innerText = percentage + '%';
@@ -944,7 +944,7 @@
         function deleteDocument(id) { if(!confirm('Remove file?')) return; db.transaction(["documents"], "readwrite").objectStore("documents").delete(id).onsuccess = function() { loadStoredDocuments(); }; }
 
 
-        // --- DYNAMIC FUNCTIONS FOR ACADEMIC PROFILE SUITE SUITE ---
+        // --- DYNAMIC FUNCTIONS FOR ACADEMIC PROFILE SUITE ---
         function syncProfilePreview() {
             const name = document.getElementById('prof-name-input').value.trim() || "Dr. Neha";
             const uni = document.getElementById('prof-uni-input').value.trim() || "Premium Academic University";
@@ -995,7 +995,6 @@
             syncProfilePreview();
             renderPublications();
             
-            // Check if CV already exists in localStorage
             if(localStorage.getItem('academic_cv_base64')) {
                 document.getElementById('cv-status-msg').innerHTML = `<span style="color:#4ade80; font-weight:600;"><i class="fa-solid fa-circle-check"></i> CV Active & Secured Securely</span>`;
                 document.getElementById('cv-download-btn-zone').style.display = 'block';
