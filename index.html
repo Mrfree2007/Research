@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Neha's PhD Research Suite</title>
+    <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Academic Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -269,6 +271,7 @@
 
     <div class="main-layout">
         
+        <!-- Sidebar Tracker (Left) -->
         <div class="sidebar">
             <div class="widget-card">
                 <div class="widget-title"><i class="fa-solid fa-bars-progress"></i> PhD Milestones</div>
@@ -339,12 +342,14 @@
                 </ul>
             </div>
 
+            <!-- Explainer Card Panel -->
             <div class="guidance-panel" id="guidance-panel">
                 <div class="guidance-header" id="guidance-title"><i class="fa-solid fa-graduation-cap"></i> Academic Guidance</div>
                 <div class="guidance-body">
                     <p id="guidance-desc">लोड हो रहा है...</p>
                     <ul class="guidance-tasks" id="guidance-tasks-list"></ul>
                     
+                    <!-- Dynamic Live MCQ Area -->
                     <div id="mcq-test-area" class="quiz-box" style="display:none;">
                         <h4><i class="fa-solid fa-laptop-code"></i> Pre-PhD Coursework PYQ Practice</h4>
                         <p id="quiz-question" style="font-size:0.9rem; margin-bottom:0.6rem; font-weight:500; color:#fff;"></p>
@@ -355,6 +360,7 @@
                         </div>
                     </div>
 
+                    <!-- Final Report Card Result Panel -->
                     <div id="quiz-result-area" class="report-card" style="display:none;">
                         <h5><i class="fa-solid fa-graduation-cap"></i> Test Performance Certificate</h5>
                         <p style="font-size:0.9rem; color:var(--text-muted);">Pre-PhD Coursework Practice Exam Results</p>
@@ -371,6 +377,7 @@
             </div>
         </div>
 
+        <!-- Working Area Tabs (Right) -->
         <div class="content-area">
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="openTab('youtube')"><i class="fa-brands fa-youtube"></i> YouTube Channels</button>
@@ -379,16 +386,37 @@
                 <button class="tab-btn" onclick="openTab('diary')"><i class="fa-solid fa-book-open"></i> Research Diary Logs</button>
             </div>
 
+            <!-- TAB 1: YOUTUBE -->
             <div id="youtube" class="tab-panel active">
                 <div class="resources-grid">
+                    <!-- NEW ADDITION 1: Teaching Pariksha -->
                     <div class="resource-card">
-                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #22c55e; color: #22c55e;">UGC NET / JRF</span></div>
+                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #f43f5e; color: #f43f5e;">Exam Prep</span></div>
+                        <div class="card-info">
+                            <h3>Teaching Pariksha</h3>
+                            <p>Excellent interactive repository covering major teaching entrance parameters, pedagogy, and strategic structural guides.</p>
+                            <a href="https://youtube.com/@teachingpariksha?si=TcysSKTEaIov0OUO" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <!-- NEW ADDITION 2: Teachers Adda247 -->
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #a855f7; color: #a855f7;">NET / JRF Core</span></div>
+                        <div class="card-info">
+                            <h3>Teachers Adda247</h3>
+                            <p>Highly professional curriculum modules addressing core UGC NET frameworks, general paper requirements, and analytical systems.</p>
+                            <a href="https://youtube.com/@teachersadda247?si=nmC2rbqBOe0AXfBb" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <!-- Card 3: Teaching Adda General -->
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #22c55e; color: #22c55e;">UGC NET</span></div>
                         <div class="card-info">
                             <h3>Teaching Adda247</h3>
                             <p>One of the finest channels for UGC NET Paper 1, teaching aptitude, and core educational methodology exams.</p>
                             <a href="https://www.youtube.com/@TeachingAdda247" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </div>
+                    <!-- Card 4: Sachin Academy -->
                     <div class="resource-card">
                         <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #3b82f6; color: #3b82f6;">Research Prep</span></div>
                         <div class="card-info">
@@ -397,6 +425,7 @@
                             <a href="https://www.youtube.com/@SachinAcademy7" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </div>
+                    <!-- Card 5: Andy Stapleton -->
                     <div class="resource-card">
                         <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge">PhD Lifecycle</span></div>
                         <div class="card-info">
@@ -408,6 +437,7 @@
                 </div>
             </div>
 
+            <!-- TAB 2: BOOKS & LITERATURE -->
             <div id="books" class="tab-panel">
                 <div class="resources-grid">
                     <div class="resource-card">
@@ -437,6 +467,7 @@
                 </div>
             </div>
 
+            <!-- TAB 3: UPLOAD VAULT -->
             <div id="upload" class="tab-panel">
                 <div class="uploader-box">
                     <div class="upload-icon"><i class="fa-solid fa-folder-plus"></i></div>
@@ -456,6 +487,7 @@
                 </div>
             </div>
 
+            <!-- TAB 4: DIARY -->
             <div id="diary" class="tab-panel">
                 <div class="log-input-group">
                     <h3 style="font-family:'Cinzel', serif; color:var(--accent-gold); font-size:1.1rem;"><i class="fa-solid fa-pen-nib"></i> Add Daily Research Entry</h3>
@@ -470,6 +502,7 @@
 
     <footer>Designed with <i class="fa-solid fa-heart"></i> for Didi's PhD Success.</footer>
 
+    <!-- INTERACTIVE DATA DICTIONARY & COMPREHENSIVE 50-QUESTION ENGINE SCRIPT -->
     <script>
         function openTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -532,25 +565,24 @@
             { q: "The process of modifying research data to present a false preferred conclusion is called:", opts: ["Data Archiving", "Data Manipulation / Falsification", "Paraphrasing", "Theoretical Modeling"], ans: 1 }
         ];
 
-        let testQuestions = []; // Shuffled Active Test Array
+        let testQuestions = []; 
         let currentQuizIdx = 0;
         let correctScore = 0;
         let wrongScore = 0;
         let hasAnsweredCurrent = false;
 
-        // Function to shuffle the entire database randomly on refresh
         function shuffleMasterQuiz() {
             let shuffled = [...masterQuizBank];
             for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
-            testQuestions = shuffled; // Load shuffled array as current active test
+            testQuestions = shuffled; 
         }
 
         function loadQuizQuestion() {
             hasAnsweredCurrent = false;
-            document.getElementById('quiz-next-btn').style.display = 'none'; // Hide next until answered
+            document.getElementById('quiz-next-btn').style.display = 'none'; 
 
             const qData = testQuestions[currentQuizIdx];
             document.getElementById('quiz-question').innerText = `Q${currentQuizIdx + 1}/50: ${qData.q}`;
@@ -585,11 +617,11 @@
                 allOpts[qData.ans].classList.add('correct'); 
                 wrongScore++;
             }
-            document.getElementById('quiz-next-btn').style.display = 'block'; // Show next question button
+            document.getElementById('quiz-next-btn').style.display = 'block'; 
         }
 
         function nextQuizQuestion() {
-            if(currentQuizIdx < 49) { // Run for 50 questions (0 to 49 index)
+            if(currentQuizIdx < 49) { 
                 currentQuizIdx++;
                 loadQuizQuestion();
             } else {
@@ -670,7 +702,7 @@
                 desc: "यह पूरी तरह से प्रैक्टिकल फेज है। यहाँ आप असल दुनिया से डेटा कलेक्ट करती हैं, लैब में एक्सपेरिमेंट करती हैं या कंप्यूटर पर सिमुलेशन चलाकर अपने रिसर्च ऑब्जेक्टिव्स का टेस्ट करती हैं।",
                 tasks: [
                     "प्राइमरी डेटा (सर्वे/इंटरव्यू) या सेकेंडरी डेटा इकट्ठा करना।",
-                    "डेटा को क्लीन करना और टूल्स की मदद से रिजल्ट्स/ग्राफ्स जेनरेट करना।"
+                    "डेटा को क्लीन करना और टूल्स की मदद से रिजल्ट्स/घाफ्स जेनरेट करना।"
                 ],
                 showQuiz: false
             },
@@ -678,7 +710,7 @@
                 title: "6. Journal Publications (Scopus / UGC-CARE)",
                 desc: "डिग्री पूरी करने के लिए आपको अपने रिसर्च के कुछ हिस्से को दुनिया के प्रतिष्ठित जर्नल्स में पब्लिश कराना होता है। अमूमन कम से कम 2 अच्छे पेपर्स पब्लिश होना जरूरी माना जाता है।",
                 tasks: [
-                    "अपने काम के आधार पर 1-2 रिसर्च पेपर का मैन्युस्क्रिप्ट तैयार करना।",
+                    "अपने काम के आधार पर 1-2 रिसर्च पेपर का मैन्युस्क्रिप्ट तैयार करना$.",
                     "सटीक जर्नल्स (Scopus, UGC-CARE) को शॉर्टलिस्ट करना।"
                 ],
                 showQuiz: false
@@ -724,7 +756,6 @@
             const resultArea = document.getElementById('quiz-result-area');
             
             if(data.showQuiz) {
-                // Only show quiz if the user hasn't finished it yet
                 if (currentQuizIdx === 0 && correctScore === 0 && wrongScore === 0) {
                     quizArea.style.display = 'block';
                     resultArea.style.display = 'none';
@@ -750,7 +781,7 @@
                 if(status) checkedCount++;
             });
             calculateProgress(checkedCount);
-            shuffleMasterQuiz(); // Shuffles questions instantly on start
+            shuffleMasterQuiz(); 
             selectMilestone('m1');
         }
         function updateProgress() {
@@ -793,7 +824,7 @@
             localStorage.setItem('phd_logs', JSON.stringify(logs)); loadLogs();
         }
 
-        // Vault Serverless Database (IndexedDB)
+        // Vault Database (IndexedDB)
         let db;
         const dbRequest = indexedDB.open("DrNehaResearchSuiteDB", 1);
         dbRequest.onupgradeneeded = function(e) { e.target.result.createObjectStore("documents", { keyPath: "id", autoIncrement: true }); };
