@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Neha's PhD Research Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #080c14;
+            --bg-card: #0f1626;
+            --bg-input: #17223b;
+            --accent-gold: #d4af37;
+            --accent-gold-hover: #f3cf5a;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(212, 175, 55, 0.2);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Header Section --- */
+        header {
+            background: linear-gradient(135deg, #111827 0%, #030712 100%);
+            padding: 3.5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .header-badge {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #ffffff 30%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 1rem 3.5rem 1rem 1.5rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-light);
+            outline: none;
+        }
+
+        .search-container button {
+            position: absolute; right: 5px; top: 5px; width: 42px; height: 42px;
+            border-radius: 50%; background: var(--accent-gold); border: none; cursor: pointer;
+        }
+
+        /* --- Layout --- */
+        .main-layout {
+            max-width: 1400px;
+            margin: 2.5rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-layout { grid-template-columns: 360px 1fr; }
+        }
+
+        .sidebar { display: flex; flex-direction: column; gap: 2rem; }
+
+        .widget-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .widget-title {
+            font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 1.1rem;
+            margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem;
+        }
+
+        /* Progress Bar */
+        .progress-info { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .progress-bar-container { width: 100%; height: 8px; background: #1e293b; border-radius: 10px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #d4af37, #f3cf5a); transition: width 0.5s ease; }
+
+        /* Milestone List Styles */
+        .milestone-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+        
+        .milestone-item { 
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.7rem 0.9rem; background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px;
+            cursor: pointer; transition: var(--transition);
+        }
+        
+        .milestone-item:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .milestone-item.selected-active {
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.08);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+
+        .milestone-left { display: flex; align-items: center; gap: 0.7rem; width: 85%; }
+        .milestone-left label { cursor: pointer; font-size: 0.9rem; width: 100%; }
+        .milestone-item input { accent-color: var(--accent-gold); width: 16px; height: 16px; cursor: pointer; }
+        
+        .info-trigger-btn { color: var(--text-muted); font-size: 0.85rem; transition: var(--transition); }
+
+        /* --- Explainer Guidance Box --- */
+        .guidance-panel {
+            background: linear-gradient(145deg, #111a2e 0%, #0d1322 100%);
+            border: 1px solid var(--border-color); border-radius: 14px;
+            padding: 1.5rem; margin-top: 1rem; box-shadow: var(--shadow);
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .guidance-header { display: flex; align-items: center; gap: 0.6rem; color: var(--accent-gold); font-family: 'Cinzel', serif; font-size: 1.1rem; margin-bottom: 0.8rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.5rem; }
+        .guidance-body p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 1rem; }
+        .guidance-tasks { list-style-position: inside; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.88rem; color: var(--text-muted); background: rgba(0, 0, 0, 0.2); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--accent-gold); margin-bottom: 1rem; }
+        .guidance-tasks li { list-style-type: none; display: flex; align-items: flex-start; gap: 0.4rem; }
+        .guidance-tasks li::before { content: "✦"; color: var(--accent-gold); }
+
+        /* --- MCQ Quiz Test UI --- */
+        .quiz-box {
+            background: #090f1d; border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 10px; padding: 1.2rem; margin-top: 1rem;
+        }
+        .quiz-box h4 { color: #fff; font-size: 1rem; margin-bottom: 0.8rem; border-left: 3px solid #3b82f6; padding-left: 0.5rem; }
+        .quiz-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+        .quiz-opt {
+            padding: 0.6rem 1rem; background: #131d33; border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; cursor: pointer; font-size: 0.88rem; text-align: left; color: var(--text-light); transition: var(--transition); width: 100%;
+        }
+        .quiz-opt:hover { background: #1a2744; border-color: rgba(255,255,255,0.1); }
+        .quiz-opt.correct { background: rgba(34, 197, 94, 0.25) !important; border-color: #22c55e !important; color: #4ade80 !important; font-weight: 600; }
+        .quiz-opt.wrong { background: rgba(239, 68, 68, 0.25) !important; border-color: #ef4444 !important; color: #f87171 !important; }
+        .quiz-nav { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+        .quiz-btn { padding: 0.4rem 1rem; background: var(--accent-gold); color: #000; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; }
+
+        /* --- Report Card Results UI --- */
+        .report-card {
+            background: rgba(212, 175, 55, 0.03); border: 2px solid var(--accent-gold); border-radius: 12px; padding: 1.5rem; margin-top: 1rem; text-align: center; animation: fadeIn 0.5s ease;
+        }
+        .report-card h5 { font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 1.3rem; margin-bottom: 1rem; }
+        .report-stats { display: flex; justify-content: space-around; margin: 1.2rem 0; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; }
+        .stat-item span { display: block; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+        .stat-item strong { font-size: 1.4rem; color: #fff; }
+        .btn-restart { padding: 0.5rem 1.5rem; background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold); border-radius: 4px; cursor: pointer; font-weight: 600; transition: var(--transition); margin-top: 0.5rem; }
+        .btn-restart:hover { background: var(--accent-gold); color: #000; }
+
+        /* --- Tabs & Grid Setup --- */
+        .content-area { display: flex; flex-direction: column; gap: 2rem; }
+        .nav-tabs { display: flex; gap: 0.75rem; background: var(--bg-card); padding: 0.5rem; border-radius: 12px; flex-wrap: wrap; }
+        .tab-btn { background: transparent; border: none; color: var(--text-muted); padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 500; border-radius: 8px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 0.6rem; }
+        .tab-btn.active { background: var(--bg-input); color: var(--accent-gold); box-shadow: inset 0 0 0 1px var(--border-color); }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: slideUp 0.4s ease forwards; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .resource-card { background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 14px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition); }
+        .resource-card:hover { transform: translateY(-4px); border-color: var(--border-color); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .card-icon { width: 40px; height: 40px; background: rgba(212, 175, 55, 0.06); color: var(--accent-gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+        .card-badge { font-size: 0.75rem; padding: 0.25rem 0.65rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; color: var(--text-muted); }
+        .card-info h3 { font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; }
+        .card-info p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; min-height: 40px; }
+        .card-link { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; color: var(--text-light); text-decoration: none; font-size: 0.9rem; transition: var(--transition); }
+        .resource-card:hover .card-link { background: linear-gradient(135deg, #d4af37 0%, #b89528 100%); color: var(--bg-dark); font-weight: 600; border-color: transparent; }
+
+        /* --- Upload Vault --- */
+        .uploader-box { background: rgba(212, 175, 55, 0.02); border: 2px dashed rgba(212, 175, 55, 0.2); border-radius: 12px; padding: 2.5rem; text-align: center; margin-bottom: 2rem; position: relative; transition: var(--transition); }
+        .uploader-box:hover { border-color: var(--accent-gold); background: rgba(212, 175, 55, 0.04); }
+        .uploader-box input[type="file"] { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+        .upload-icon { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 1rem; }
+        .doc-table-container { background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.04); }
+        .doc-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+        .doc-table th, .doc-table td { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+        .doc-table th { background: rgba(255, 255, 255, 0.02); color: var(--accent-gold); font-family: 'Cinzel', serif; font-size: 0.85rem; }
+
+        .btn-action { padding: 0.4rem 0.8rem; border-radius: 6px; border: none; cursor: pointer; font-size: 0.8rem; font-weight: 500; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.3rem; }
+        .btn-download { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .btn-download:hover { background: #3b82f6; color: #fff; }
+        .btn-delete { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); margin-left: 0.5rem; }
+        .btn-delete:hover { background: #ef4444; color: #fff; }
+        .no-docs { padding: 2rem; text-align: center; color: var(--text-muted); font-style: italic; }
+
+        /* --- Diary --- */
+        .log-input-group { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+        .log-textarea { width: 100%; height: 110px; background: var(--bg-input); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 1rem; color: var(--text-light); font-family: inherit; resize: vertical; outline: none; }
+        .log-textarea:focus { border-color: var(--accent-gold); }
+        .btn-save-log { align-self: flex-end; padding: 0.7rem 1.8rem; background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .btn-save-log:hover { background: var(--accent-gold-hover); }
+        .log-entry-card { background: rgba(255, 255, 255, 0.01); border-left: 3px solid var(--accent-gold); padding: 1.2rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; position: relative; }
+        .log-date { font-size: 0.75rem; color: var(--accent-gold); margin-bottom: 0.4rem; font-weight: 600; }
+        .log-delete-icon { position: absolute; right: 15px; top: 15px; color: var(--text-muted); cursor: pointer; }
+
+        footer { text-align: center; padding: 3rem 2rem; margin-top: 5rem; border-top: 1px solid rgba(255, 255, 255, 0.05); color: var(--text-muted); font-size: 0.9rem; }
+        footer i { color: #ef4444; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-badge"><i class="fa-solid fa-award"></i> Premium Academic Workspace <i class="fa-solid fa-award"></i></div>
+        <h1>Dr. Neha's Research Suite</h1>
+        <p>A sophisticated digital dashboard custom-tailored for PhD academic research, secure document archiving, and smooth milestone tracking.</p>
+        
+        <div class="search-container">
+            <form action="https://scholar.google.com/scholar" method="GET" target="_blank">
+                <input type="text" name="q" placeholder="Search Google Scholar for research papers, articles, and citations..." required>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        
+        <div class="sidebar">
+            <div class="widget-card">
+                <div class="widget-title"><i class="fa-solid fa-bars-progress"></i> PhD Milestones</div>
+                <div class="progress-wrapper">
+                    <div class="progress-info"><span>Overall Progress</span><strong id="progress-percent">0%</strong></div>
+                    <div class="progress-bar-container"><div id="progress-fill" class="progress-bar-fill"></div></div>
+                </div>
+                
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.8rem;"><i class="fa-solid fa-circle-info"></i> किसी भी माइलस्टोन पर क्लिक करके उसकी पूरी जानकारी देखें:</p>
+                
+                <ul class="milestone-list">
+                    <li class="milestone-item" id="item-m1" onclick="selectMilestone('m1')">
+                        <div class="milestone-left">
+                            <input type="checkbox" id="m1" onchange="updateProgress(); event.stopPropagation();">
+                            <label for="m1" onclick="event.stopPropagation();">1. Course Work & Exams</label>
+                        </div>
+                        <div class="info-trigger-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </li>
+                    <li class="milestone-item" id="item-m2" onclick="selectMilestone('m2')">
+                        <div class="milestone-left">
+                            <input type="checkbox" id="m2" onchange="updateProgress(); event.stopPropagation();">
+                            <label for="m2" onclick="event.stopPropagation();">2. Topic Finalization</label>
+                        </div>
+                        <div class="info-trigger-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </li>
+                    <li class="milestone-item" id="item-m3" onclick="selectMilestone('m3')">
+                        <div class="milestone-left">
+                            <input type="checkbox" id="m3" onchange="updateProgress(); event.stopPropagation();">
+                            <label for="m3" onclick="event.stopPropagation();">3. Literature Review</label>
+                        </div>
+                        <div class="info-trigger-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </li>
+                    <li class="milestone-item" id="item-m4" onclick="selectMilestone('m4')">
+                        <div class="milestone-left">
+                            <input type="checkbox" id="m4" onchange="updateProgress(); event.stopPropagation();">
+                            <label for="m4" onclick="event.stopPropagation();">4. Research Methodology</label>
+                        </div>
+                        <div class="info-trigger-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </li>
+                    <li class="milestone-item" id="item-m5" onclick="selectMilestone('m5')">
+                        <div class="milestone-left">
+                            <input type="checkbox" id="m5" onchange="updateProgress(); event.stopPropagation();">
+                            <label for="m5" onclick="event.stopPropagation();">5. Data & Testing</label>
+                        </div>
+                        <div class="info-trigger-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </li>
+                    <li class="milestone-item" id="item-m6" onclick="selectMilestone('m6')">
+                        <div class="milestone-left">
+                            <input type="checkbox" id="m6" onchange="updateProgress(); event.stopPropagation();">
+                            <label for="m6" onclick="event.stopPropagation();">6. Journal Publications</label>
+                        </div>
+                        <div class="info-trigger-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </li>
+                    <li class="milestone-item" id="item-m7" onclick="selectMilestone('m7')">
+                        <div class="milestone-left">
+                            <input type="checkbox" id="m7" onchange="updateProgress(); event.stopPropagation();">
+                            <label for="m7" onclick="event.stopPropagation();">7. Thesis Writing</label>
+                        </div>
+                        <div class="info-trigger-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </li>
+                    <li class="milestone-item" id="item-m8" onclick="selectMilestone('m8')">
+                        <div class="milestone-left">
+                            <input type="checkbox" id="m8" onchange="updateProgress(); event.stopPropagation();">
+                            <label for="m8" onclick="event.stopPropagation();">8. Final Pre-Viva</label>
+                        </div>
+                        <div class="info-trigger-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="guidance-panel" id="guidance-panel">
+                <div class="guidance-header" id="guidance-title"><i class="fa-solid fa-graduation-cap"></i> Academic Guidance</div>
+                <div class="guidance-body">
+                    <p id="guidance-desc">लोड हो रहा है...</p>
+                    <ul class="guidance-tasks" id="guidance-tasks-list"></ul>
+                    
+                    <div id="mcq-test-area" class="quiz-box" style="display:none;">
+                        <h4><i class="fa-solid fa-laptop-code"></i> Pre-PhD Coursework PYQ Practice</h4>
+                        <p id="quiz-question" style="font-size:0.9rem; margin-bottom:0.6rem; font-weight:500; color:#fff;"></p>
+                        <div class="quiz-options" id="quiz-options-container"></div>
+                        <div class="quiz-nav">
+                            <span id="quiz-score-board" style="color:var(--accent-gold); font-weight:600;">Question: 1/50</span>
+                            <button class="quiz-btn" id="quiz-next-btn" onclick="nextQuizQuestion()">Next Question <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div id="quiz-result-area" class="report-card" style="display:none;">
+                        <h5><i class="fa-solid fa-graduation-cap"></i> Test Performance Certificate</h5>
+                        <p style="font-size:0.9rem; color:var(--text-muted);">Pre-PhD Coursework Practice Exam Results</p>
+                        <div class="report-stats">
+                            <div class="stat-item"><span>Correct</span><strong id="res-correct" style="color:#4ade80;">0</strong></div>
+                            <div class="stat-item"><span>Wrong</span><strong id="res-wrong" style="color:#f87171;">0</strong></div>
+                            <div class="stat-item"><span>Score %</span><strong id="res-percent" style="color:var(--accent-gold);">0%</strong></div>
+                        </div>
+                        <p id="res-feedback" style="font-weight:600; font-size:0.95rem; margin-bottom:1rem;"></p>
+                        <button class="btn-restart" onclick="restartQuizTest()">Retake Practice Exam</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="openTab('youtube')"><i class="fa-brands fa-youtube"></i> YouTube Channels</button>
+                <button class="tab-btn" onclick="openTab('books')"><i class="fa-solid fa-book"></i> Books & Literature</button>
+                <button class="tab-btn" onclick="openTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Document Vault (Upload)</button>
+                <button class="tab-btn" onclick="openTab('diary')"><i class="fa-solid fa-book-open"></i> Research Diary Logs</button>
+            </div>
+
+            <div id="youtube" class="tab-panel active">
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #22c55e; color: #22c55e;">UGC NET / JRF</span></div>
+                        <div class="card-info">
+                            <h3>Teaching Adda247</h3>
+                            <p>One of the finest channels for UGC NET Paper 1, teaching aptitude, and core educational methodology exams.</p>
+                            <a href="https://www.youtube.com/@TeachingAdda247" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge" style="border-color: #3b82f6; color: #3b82f6;">Research Prep</span></div>
+                        <div class="card-info">
+                            <h3>Sachin Academy</h3>
+                            <p>Highly recommended platform covering foundational pedagogy guidance, academic content updates, and exam roadmaps.</p>
+                            <a href="https://www.youtube.com/@SachinAcademy7" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-brands fa-youtube"></i></div><span class="card-badge">PhD Lifecycle</span></div>
+                        <div class="card-info">
+                            <h3>Andy Stapleton</h3>
+                            <p>Excellent advice on writing high-impact thesis papers, doing smart literature reviews, and managing time during a PhD.</p>
+                            <a href="https://www.youtube.com/@AndyStapleton" target="_blank" class="card-link">Open Channel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="books" class="tab-panel">
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-solid fa-book-open"></i></div><span class="card-badge">Digital Library</span></div>
+                        <div class="card-info">
+                            <h3>Open Library</h3>
+                            <p>An open, comprehensive archive containing millions of books, public domain textbooks, and reference guides.</p>
+                            <a href="https://openlibrary.org/" target="_blank" class="card-link">Access Open Library <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-solid fa-bookmark"></i></div><span class="card-badge">Global Repository</span></div>
+                        <div class="card-info">
+                            <h3>Z-Library</h3>
+                            <p>One of the world's largest online libraries for digital text books, comprehensive reference materials, and academic publications.</p>
+                            <a href="https://z-library.bz/" target="_blank" class="card-link">Access Z-Library <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <div class="card-top"><div class="card-icon"><i class="fa-solid fa-network-wired"></i></div><span class="card-badge">Literature Mapping</span></div>
+                        <div class="card-info">
+                            <h3>Connected Papers</h3>
+                            <p>An amazing visual mapping engine to instantly locate similar papers, background literature, and trending studies.</p>
+                            <a href="https://www.connectedpapers.com" target="_blank" class="card-link">Map Papers <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload" class="tab-panel">
+                <div class="uploader-box">
+                    <div class="upload-icon"><i class="fa-solid fa-folder-plus"></i></div>
+                    <h3>Click or Drag Files Here to Upload</h3>
+                    <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.4rem;">Upload your PDFs, books, study notes, or documents. They save securely on your system browser.</p>
+                    <input type="file" id="file-uploader" onchange="handleFileUpload(this)">
+                </div>
+                <h3 style="font-family:'Cinzel', serif; color:var(--accent-gold); font-size:1.1rem; margin-bottom:1rem;"><i class="fa-solid fa-box-archive"></i> Uploaded Documents Vault</h3>
+                <div class="doc-table-container">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>File Name</th><th>File Size</th><th>Date Added</th><th style="text-align:right;">Actions</th></tr>
+                        </thead>
+                        <tbody id="doc-list-tbody"></tbody>
+                    </table>
+                    <div id="no-docs-msg" class="no-docs">No documents added yet. Start archiving your critical notes above.</div>
+                </div>
+            </div>
+
+            <div id="diary" class="tab-panel">
+                <div class="log-input-group">
+                    <h3 style="font-family:'Cinzel', serif; color:var(--accent-gold); font-size:1.1rem;"><i class="fa-solid fa-pen-nib"></i> Add Daily Research Entry</h3>
+                    <textarea id="log-text" class="log-textarea" placeholder="Type notes from guide meetings, quick ideas, summary points, or data goals..."></textarea>
+                    <button class="btn-save-log" onclick="saveResearchLog()">Save to Diary</button>
+                </div>
+                <h3 style="font-family:'Cinzel', serif; color:var(--text-light); font-size:1.1rem; margin-bottom:1rem;"><i class="fa-solid fa-clock-rotate-left"></i> Archived Logs</h3>
+                <div id="log-entries-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>Designed with <i class="fa-solid fa-heart"></i> for Didi's PhD Success.</footer>
+
+    <script>
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // --- MASSIVE 50 RESEARCH METHODOLOGY PYQ QUESTION PORTAL ---
+        const masterQuizBank = [
+            { q: "Which of the following is an example of a qualitative research design?", opts: ["Experimental Design", "Survey Research", "Grounded Theory", "Ex-post Facto Design"], ans: 2 },
+            { q: "A research paper is a brief report of research work based on:", opts: ["Primary Data only", "Secondary Data only", "Both Primary and Secondary Data", "None of the above"], ans: 2 },
+            { q: "What is a 'Research Gap'?", opts: ["The time difference between two projects", "An unaddressed or unsolved problem in literature", "The page limit of a thesis", "Lack of budget for testing"], ans: 1 },
+            { q: "Which referencing style is most commonly used in Social Sciences and Psychology?", opts: ["IEEE Format", "APA Style", "MLA Style", "Chicago Manual"], ans: 1 },
+            { q: "Plagiarism in research thesis can be best avoided by:", opts: ["Citing and paraphrasing the original sources correctly", "Changing font size", "Translating without credit", "Omitting reference indexes"], ans: 0 },
+            { q: "A formulation of a postulation or statement that can be scientifically tested is called:", opts: ["Objective", "Hypothesis", "Fact", "Problem Declaration"], ans: 1 },
+            { q: "Empirical research relies primarily on which of the following?", opts: ["Pure Deductive Logic", "Observation and Experience", "Traditional Scripts", "Speculative Theory"], ans: 1 },
+            { q: "Controlled laboratory environments are typical properties of which research type?", opts: ["Historical Research", "Experimental Research", "Descriptive Survey", "Philosophical Analysis"], ans: 1 },
+            { q: "The process of collecting data from every individual element of a population is called:", opts: ["Sampling", "Census", "Case Study", "Stratification"], ans: 1 },
+            { q: "Which of the following is considered secondary source data?", opts: ["Audio Interview Records", "Government Journal Archive", "Experiment Output Matrix", "Participant Questionnaires"], ans: 1 },
+            { q: "An operational definition is explicitly created to specify:", opts: ["How a variable is measured", "The theoretical background", "Dictionary synonyms", "The index title"], ans: 0 },
+            { q: "Sampling error decreases systematically with an increase in:", opts: ["Heterogeneity", "Sample Size", "Variance", "Interviewer Bias"], ans: 1 },
+            { q: "A type of sampling where every member of population has an equal chance of selection is:", opts: ["Quota Sampling", "Purposive Sampling", "Random Sampling", "Snowball Sampling"], ans: 2 },
+            { q: "What type of scale possesses an absolute zero point?", opts: ["Nominal Scale", "Ordinal Scale", "Interval Scale", "Ratio Scale"], ans: 3 },
+            { q: "The scope of research integrity specifically excludes which component?", opts: ["Honest Reporting", "Citing Work", "Data Fabrication", "Peer Review Approval"], ans: 2 },
+            { q: "When a researcher rejects a true null hypothesis, it results in:", opts: ["Type I Error", "Type II Error", "Correct Decision", "Sampling Efficiency"], ans: 0 },
+            { q: "The conceptual framework or structure within which research is conducted is called:", opts: ["Research Abstract", "Research Design", "Research Hypothesis", "Research Paradigm"], ans: 1 },
+            { q: "Which tool is commonly used to manage citations and bibliographies automatically?", opts: ["SPSS", "Zotero / Mendeley", "TurnitIn", "MATLAB"], ans: 1 },
+            { q: "A dynamic study conducted over an extended period tracking the same sample group is:", opts: ["Cross-sectional Study", "Longitudinal Study", "Experimental Study", "Case Study"], ans: 1 },
+            { q: "Which database is famous globally for computing journal citation metrics and impact factors?", opts: ["Wikipedia", "Web of Science / Scopus", "Acrobat Reader", "MS Excel"], ans: 1 },
+            { q: "Action research is traditionally designed to solve:", opts: ["Long term macro theories", "An immediate local problem", "Historical data mysteries", "Pure mathematics puzzles"], ans: 1 },
+            { q: "The ultimate aim of scientific research is always:", opts: ["To write textbooks", "To formulate laws and systematic theories", "To achieve high paying positions", "To increase library stock"], ans: 1 },
+            { q: "What does 'h-index' measure for an individual researcher?", opts: ["Age and academic experience", "Productivity and citation impact of publications", "Total books read", "Number of global degrees"], ans: 1 },
+            { q: "A research study that evaluates the cause-effect relationship of variables is:", opts: ["Descriptive", "Explanatory / Causal", "Exploratory", "Historical"], ans: 1 },
+            { q: "Double-blind procedures are primarily introduced in experiments to eliminate:", opts: ["Participant attrition", "Experimenter and subject bias", "Equipment calibration faults", "Budget errors"], ans: 1 },
+            { q: "Which index specifies data variation relative to its mean value?", opts: ["Standard Deviation", "Range", "Mode", "Median"], ans: 0 },
+            { q: "Ethical approvals must be taken from institutional boards prior to doing research on:", opts: ["Open source books", "Human/Animal subjects", "Climatic weather simulations", "Mathematical constants"], ans: 1 },
+            { q: "The main constraint of case study research method is:", opts: ["In-depth collection", "Limited generalizability of results", "Short documentation length", "Low setup costs"], ans: 1 },
+            { q: "Objectivity in scientific research explicitly means:", opts: ["Personal emotions governing data", "Unbiased and independent measurement", "Writing lengthy statements", "Using expensive laptops"], ans: 1 },
+            { q: "A literature review should ideally occur:", opts: ["Only at the end", "Continuously throughout the lifecycle", "Before topic selection only", "During viva voce preparation"], ans: 1 },
+            { q: "What is an independent variable?", opts: ["The variable being measured", "The variable manipulated by the experimenter", "The constant room temperature", "The sample size indicator"], ans: 1 },
+            { q: "What is a dependent variable?", opts: ["The variable manipulated", "The outcome variable being measured", "The external supervisor", "The research grant wallet"], ans: 1 },
+            { q: "The critical value threshold often chosen for statistical significance (p-value) is:", opts: ["0.50", "0.05", "0.95", "0.001"], ans: 1 },
+            { q: "An exploratory research design is most useful when:", opts: ["The problem is well-defined and structured", "The research issue is vague or little understood", "Testing final engineering outputs", "Writing bibliography items"], ans: 1 },
+            { q: "The standard format used to outline primary research articles is known as:", opts: ["IMRAD Format", "MLA Guidelines", "Harvard Paragraph Style", "ISO Indexing Matrix"], ans: 0 },
+            { q: "Which tool is used professionally to check for text plagiarism?", opts: ["SPSS", "TurnitIn / Urkund", "Photoshop", "Notepad"], ans: 1 },
+            { q: "Snowball sampling is a highly effective methodology when dealing with:", opts: ["Homogeneous generic crowds", "Hidden or hard-to-reach populations", "Large agricultural fields", "Random phone listings"], ans: 1 },
+            { q: "What does an Impact Factor indicate for an academic journal?", opts: ["Total page length printed yearly", "Average citation frequency of articles published", "Price of monthly subscription", "Number of editorial board members"], ans: 1 },
+            { q: "A questionnaire is a data collection instrument containing:", opts: ["Only descriptive paragraphs", "A structured series of questions", "Equations exclusively", "List of supervisor contacts"], ans: 1 },
+            { q: "Triangulation in qualitative research means:", opts: ["Using geometry formulas", "Combining multiple data sources or methods", "Drawing triangle graphs", "Rejecting peer reviews"], ans: 1 },
+            { q: "A null hypothesis states that:", opts: ["There is a significant difference", "There is no significant difference or relationship", "The sample size is zero", "The data collection failed"], ans: 1 },
+            { q: "The ultimate authority over a PhD candidate's thesis defense rests with the:", opts: ["Librarian", "External Examiners & Committee Board", "College Clerical Desk", "Student Union Leader"], ans: 1 },
+            { q: "A pilot study is explicitly conducted to:", opts: ["Train commercial aircraft operators", "Test feasibility on a small scale before full deployment", "Collect final data results", "Publish rapid micro papers"], ans: 1 },
+            { q: "Which data chart displays components as proportional slices of a whole circle?", opts: ["Histogram", "Pie Chart", "Scatter Plot", "Line Graph"], ans: 1 },
+            { q: "What is the primary feature of an open-access journal?", opts: ["Free public access to read and download articles", "No registration required to submit papers", "No peer review filtration", "Printed on special luxury sheets"], ans: 0 },
+            { q: "Stratified sampling divides a target population into distinct groups based on:", opts: ["Shared specific characteristics", "Arrival timestamps", "Alphabetical indexing order", "Random luck"], ans: 0 },
+            { q: "The term 'Bibliography' refers explicitly to:", opts: ["Biography of authors", "List of source literature referenced or consulted", "Index of equipment tools", "Mathematical appendix tables"], ans: 1 },
+            { q: "If two variables move concurrently in identical directions, their correlation coefficient is:", opts: ["Negative", "Positive", "Zero", "Infinite"], ans: 1 },
+            { q: "A fundamental property of any reliable research instrument is:", opts: ["High printing cost", "Consistency of measurement results", "Extremely large weight", "Colorful user interface"], ans: 1 },
+            { q: "The process of modifying research data to present a false preferred conclusion is called:", opts: ["Data Archiving", "Data Manipulation / Falsification", "Paraphrasing", "Theoretical Modeling"], ans: 1 }
+        ];
+
+        let testQuestions = []; // Shuffled Active Test Array
+        let currentQuizIdx = 0;
+        let correctScore = 0;
+        let wrongScore = 0;
+        let hasAnsweredCurrent = false;
+
+        // Function to shuffle the entire database randomly on refresh
+        function shuffleMasterQuiz() {
+            let shuffled = [...masterQuizBank];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            testQuestions = shuffled; // Load shuffled array as current active test
+        }
+
+        function loadQuizQuestion() {
+            hasAnsweredCurrent = false;
+            document.getElementById('quiz-next-btn').style.display = 'none'; // Hide next until answered
+
+            const qData = testQuestions[currentQuizIdx];
+            document.getElementById('quiz-question').innerText = `Q${currentQuizIdx + 1}/50: ${qData.q}`;
+            const optContainer = document.getElementById('quiz-options-container');
+            optContainer.innerHTML = '';
+
+            qData.opts.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opt';
+                btn.innerText = opt;
+                btn.onclick = function(e) { 
+                    e.stopPropagation(); 
+                    checkQuizAnswer(idx, btn); 
+                };
+                optContainer.appendChild(btn);
+            });
+            document.getElementById('quiz-score-board').innerText = `Question: ${currentQuizIdx + 1}/50`;
+        }
+
+        function checkQuizAnswer(selectedIdx, clickedBtn) {
+            if (hasAnsweredCurrent) return; 
+            hasAnsweredCurrent = true;
+
+            const qData = testQuestions[currentQuizIdx];
+            const allOpts = document.querySelectorAll('.quiz-opt');
+
+            if(selectedIdx === qData.ans) {
+                clickedBtn.classList.add('correct');
+                correctScore++;
+            } else {
+                clickedBtn.classList.add('wrong');
+                allOpts[qData.ans].classList.add('correct'); 
+                wrongScore++;
+            }
+            document.getElementById('quiz-next-btn').style.display = 'block'; // Show next question button
+        }
+
+        function nextQuizQuestion() {
+            if(currentQuizIdx < 49) { // Run for 50 questions (0 to 49 index)
+                currentQuizIdx++;
+                loadQuizQuestion();
+            } else {
+                showFinalReportCard();
+            }
+        }
+
+        function showFinalReportCard() {
+            document.getElementById('mcq-test-area').style.display = 'none';
+            const resultArea = document.getElementById('quiz-result-area');
+            resultArea.style.display = 'block';
+
+            document.getElementById('res-correct').innerText = correctScore;
+            document.getElementById('res-wrong').innerText = wrongScore;
+            
+            const percentage = Math.round((correctScore / 50) * 100);
+            document.getElementById('res-percent').innerText = percentage + '%';
+
+            let feedback = "";
+            if(percentage >= 80) feedback = "Excellent Standing! Highly Prepared for Coursework Exam. 🎉";
+            else if(percentage >= 55) feedback = "Good Progress! Satisfactory Academic Performance. 👍";
+            else feedback = "Need Improvement. Re-study and Practice again. 📚";
+
+            document.getElementById('res-feedback').innerText = feedback;
+        }
+
+        function restartQuizTest() {
+            currentQuizIdx = 0;
+            correctScore = 0;
+            wrongScore = 0;
+            document.getElementById('quiz-result-area').style.display = 'none';
+            document.getElementById('mcq-test-area').style.display = 'block';
+            shuffleMasterQuiz();
+            loadQuizQuestion();
+        }
+
+        const milestoneExplainerData = {
+            m1: {
+                title: "1. Course Work & Research Methodology Exams",
+                desc: "PhD की शुरुआत में यह पहला पड़ाव होता है। इसमें यूनिवर्सिटी द्वारा तय किए गए कोर सब्जेक्ट्स और Research Methodology की थ्योरी पढ़नी होती है और इसके क्रेडिट exams पास करने अनिवार्य हैं। नीचे दिए गए लाइव 50-क्वेश्चन मॉक टेस्ट से दीदी अपनी तैयारी चेक कर सकती हैं (हर रिफ्रेश पर नए सवाल लोड होंगे):",
+                tasks: [
+                    "Research Methodology की क्लास अटेंड करना और बेसिक्स समझना।",
+                    "सांख्यिकी (Statistics) और डेटा एनालिसिस के टूल्स की बेसिक तैयारी।",
+                    "यूनिवर्सिटी द्वारा आयोजित होने वाले प्री-पीएचडी कोर्सवर्क एग्जाम को क्लियर करना।"
+                ],
+                showQuiz: true
+            },
+            m2: {
+                title: "2. Research Topic & Synopsis Finalization",
+                desc: "यहाँ आपको अपने पूरे PhD का मुख्य विषय (Problem Statement) तय करना होता है। एक मजबूत सिनॉप्सिस (Synopsis/Proposal) बनाकर DRC (Departmental Research Committee) के सामने प्रेजेंट करना होता है।",
+                tasks: [
+                    "अपने रिसर्च एरिया में चल रहे करंट ट्रेंड्स को खोजना।",
+                    "गाइड/सुपरवाइज़र के साथ मीटिंग करके टॉपिक को 'Narrow down' करना।",
+                    "एक प्रपोजल डिफेंड करके अप्रूवल पाना।"
+                ],
+                showQuiz: false
+            },
+            m3: {
+                title: "3. Extensive Literature Review",
+                desc: "यह पीएचडी की रीढ़ की हड्डी है। आपके विषय पर दुनिया में पिछले 10-15 सालों में जितने भी बड़े रिसर्च पेपर्स, जर्नल आर्टिकल्स और बुक्स पब्लिश हुई हैं, उन्हें गहराई से पढ़ना और उनमें 'Research Gap' ढूंढना होता है।",
+                tasks: [
+                    "Google Scholar, ResearchGate और Scopus से कम से कम 50+ रिलेवेंट पेपर्स डाउनलोड करना।",
+                    "पेपर्स के मुख्य निष्कर्षों, लिमिटेशन्स और मेथड्स की एक एक्सेल शीट (Matrix) बनाना।"
+                ],
+                showQuiz: false
+            },
+            m4: {
+                title: "4. Designing Research Methodology",
+                desc: "इसमें आपको यह ब्लूप्रिंट तैयार करना होता है कि आप अपना रिसर्च कैसे करेंगी। आप कौन से एल्गोरिथ्म, टूल्स, फॉर्मूले, सर्वे फॉर्म्स या एक्सपेरिमेंटल सेटअप का उपयोग करके अपने नतीजों तक पहुंचेंगी।",
+                tasks: [
+                    "यह तय करना कि रिसर्च Quantitative है, Qualitative है या Mixed है।",
+                    "डेटा कलेक्शन के लिए सैंपलिंग साइज और टूल्स फाइनल करना।"
+                ],
+                showQuiz: false
+            },
+            m5: {
+                title: "5. Data Collection, Simulation & Testing",
+                desc: "यह पूरी तरह से प्रैक्टिकल फेज है। यहाँ आप असल दुनिया से डेटा कलेक्ट करती हैं, लैब में एक्सपेरिमेंट करती हैं या कंप्यूटर पर सिमुलेशन चलाकर अपने रिसर्च ऑब्जेक्टिव्स का टेस्ट करती हैं।",
+                tasks: [
+                    "प्राइमरी डेटा (सर्वे/इंटरव्यू) या सेकेंडरी डेटा इकट्ठा करना।",
+                    "डेटा को क्लीन करना और टूल्स की मदद से रिजल्ट्स/ग्राफ्स जेनरेट करना।"
+                ],
+                showQuiz: false
+            },
+            m6: {
+                title: "6. Journal Publications (Scopus / UGC-CARE)",
+                desc: "डिग्री पूरी करने के लिए आपको अपने रिसर्च के कुछ हिस्से को दुनिया के प्रतिष्ठित जर्नल्स में पब्लिश कराना होता है। अमूमन कम से कम 2 अच्छे पेपर्स पब्लिश होना जरूरी माना जाता है।",
+                tasks: [
+                    "अपने काम के आधार पर 1-2 रिसर्च पेपर का मैन्युस्क्रिप्ट तैयार करना।",
+                    "सटीक जर्नल्स (Scopus, UGC-CARE) को शॉर्टलिस्ट करना।"
+                ],
+                showQuiz: false
+            },
+            m7: {
+                title: "7. Thesis Writing & Formatting",
+                desc: "अब तक के किए गए सारे काम को एक बड़ी किताब (लगभग 150-250 पेज) के रूप में स्ट्रक्चर्ड तरीके से लिखना होता है। इसमें यूनिवर्सिटी की गाइडलाइंस के हिसाब से फॉन्ट, मार्जिन और साइटेशन का ध्यान रखना होता है।",
+                tasks: [
+                    "थीसिस के सभी 5-6 चैप्टर्स को क्रमानुसार अरेंज करना।",
+                    "Plagiarism Check (टर्निटिन टूल द्वारा) करके कॉपीराइट कंटेंट को हटाना (अमूमन <10% अलाउड)।"
+                ],
+                showQuiz: false
+            },
+            m8: {
+                title: "8. Colloquium, Thesis Submission & Final Viva",
+                desc: "यह आखिरी और सबसे बड़ा दिन है! यूनिवर्सिटी में अपनी पूरी थीसिस सबमिट करने के बाद, बाहर से आए हुए एक्सपर्ट्स और प्रोफेसरों के पैनल के सामने आपको अपने 3-5 साल के काम को विज्ञान सम्मत तरीके से डिफेंड करना होता है।",
+                tasks: [
+                    "डिपार्टमेंट के सामने प्री-सबमिशन सेमिनार (Colloquium) देना।",
+                    "फाइनल वाइवा-वॉयस (Viva-Voce) के लिए एक शानदार 20-30 स्लाइड्स का PPT प्रेजेंटेशन तैयार करना।"
+                ],
+                showQuiz: false
+            }
+        };
+
+        function selectMilestone(mId) {
+            document.querySelectorAll('.milestone-item').forEach(item => item.classList.remove('selected-active'));
+            document.getElementById('item-' + mId).classList.add('selected-active');
+            
+            const data = milestoneExplainerData[mId];
+            document.getElementById('guidance-title').innerHTML = `<i class="fa-solid fa-book-bookmark"></i> ${data.title}`;
+            document.getElementById('guidance-desc').innerText = data.desc;
+            
+            const listContainer = document.getElementById('guidance-tasks-list');
+            listContainer.innerHTML = '';
+            
+            data.tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.innerText = task;
+                listContainer.appendChild(li);
+            });
+
+            const quizArea = document.getElementById('mcq-test-area');
+            const resultArea = document.getElementById('quiz-result-area');
+            
+            if(data.showQuiz) {
+                // Only show quiz if the user hasn't finished it yet
+                if (currentQuizIdx === 0 && correctScore === 0 && wrongScore === 0) {
+                    quizArea.style.display = 'block';
+                    resultArea.style.display = 'none';
+                    loadQuizQuestion();
+                } else if (currentQuizIdx >= 49 && (correctScore > 0 || wrongScore > 0)) {
+                    quizArea.style.display = 'none';
+                    resultArea.style.display = 'block';
+                } else {
+                    quizArea.style.display = 'block';
+                }
+            } else {
+                quizArea.style.display = 'none';
+                resultArea.style.display = 'none';
+            }
+        }
+
+        const milestones = ['m1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8'];
+        function loadMilestones() {
+            let checkedCount = 0;
+            milestones.forEach(mId => {
+                const status = localStorage.getItem(mId) === 'true';
+                document.getElementById(mId).checked = status;
+                if(status) checkedCount++;
+            });
+            calculateProgress(checkedCount);
+            shuffleMasterQuiz(); // Shuffles questions instantly on start
+            selectMilestone('m1');
+        }
+        function updateProgress() {
+            let checkedCount = 0;
+            milestones.forEach(mId => {
+                const isChecked = document.getElementById(mId).checked;
+                localStorage.setItem(mId, isChecked);
+                if(isChecked) checkedCount++;
+            });
+            calculateProgress(checkedCount);
+        }
+        function calculateProgress(count) {
+            const percentage = Math.round((count / milestones.length) * 100);
+            document.getElementById('progress-percent').innerText = percentage + '%';
+            document.getElementById('progress-fill').style.width = percentage + '%';
+        }
+
+        // Diary Logs
+        function loadLogs() {
+            const container = document.getElementById('log-entries-container'); container.innerHTML = '';
+            let logs = JSON.parse(localStorage.getItem('phd_logs')) || [];
+            if(logs.length === 0) { container.innerHTML = '<div style="color:var(--text-muted); font-style:italic;">No logs added yet.</div>'; return; }
+            logs.forEach((log, idx) => {
+                const div = document.createElement('div'); div.className = 'log-entry-card';
+                div.innerHTML = `<div class="log-date">${log.date}</div><div style="font-size:0.95rem; white-space:pre-wrap;">${log.text}</div><i class="fa-solid fa-trash-can log-delete-icon" onclick="deleteLog(${idx})"></i>`;
+                container.appendChild(div);
+            });
+        }
+        function saveResearchLog() {
+            const txt = document.getElementById('log-text').value.trim();
+            if(!txt) return alert('Please enter text.');
+            let logs = JSON.parse(localStorage.getItem('phd_logs')) || [];
+            logs.unshift({ text: txt, date: new Date().toLocaleString() });
+            localStorage.setItem('phd_logs', JSON.stringify(logs));
+            document.getElementById('log-text').value = ''; loadLogs();
+        }
+        function deleteLog(idx) {
+            if(!confirm('Delete log?')) return;
+            let logs = JSON.parse(localStorage.getItem('phd_logs')) || []; logs.splice(idx, 1);
+            localStorage.setItem('phd_logs', JSON.stringify(logs)); loadLogs();
+        }
+
+        // Vault Serverless Database (IndexedDB)
+        let db;
+        const dbRequest = indexedDB.open("DrNehaResearchSuiteDB", 1);
+        dbRequest.onupgradeneeded = function(e) { e.target.result.createObjectStore("documents", { keyPath: "id", autoIncrement: true }); };
+        dbRequest.onsuccess = function(e) { db = e.target.result; loadStoredDocuments(); };
+
+        function handleFileUpload(input) {
+            const file = input.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const fileData = { name: file.name, size: (file.size / 1024).toFixed(1) + ' KB', date: new Date().toLocaleDateString(), content: e.target.result };
+                db.transaction(["documents"], "readwrite").objectStore("documents").add(fileData).onsuccess = function() { input.value = ''; loadStoredDocuments(); };
+            };
+            reader.readAsDataURL(file);
+        }
+        function loadStoredDocuments() {
+            if (!db) return; const tbody = document.getElementById('doc-list-tbody'); const noDocsMsg = document.getElementById('no-docs-msg'); tbody.innerHTML = '';
+            let count = 0;
+            db.transaction(["documents"], "readonly").objectStore("documents").openCursor().onsuccess = function(e) {
+                const cursor = e.target.result;
+                if (cursor) {
+                    count++; const doc = cursor.value; const tr = document.createElement('tr');
+                    tr.innerHTML = `<td style="font-weight:500; color:#fff;"><i class="fa-solid fa-file-pdf" style="color:#f87171; margin-right:0.5rem;"></i> ${doc.name}</td><td>${doc.size}</td><td>${doc.date}</td><td style="text-align:right;"><button class="btn-action btn-download" onclick="downloadDocument(${doc.id})"><i class="fa-solid fa-arrow-down"></i> Get</button><button class="btn-action btn-delete" onclick="deleteDocument(${doc.id})"><i class="fa-solid fa-trash-can"></i> Delete</button></td>`;
+                    tbody.appendChild(tr); cursor.continue();
+                } else { noDocsMsg.style.display = (count > 0) ? 'none' : 'block'; }
+            };
+        }
+        function downloadDocument(id) {
+            db.transaction(["documents"], "readonly").objectStore("documents").get(id).onsuccess = function(e) {
+                const doc = e.target.result;
+                if (doc) { const dl = document.createElement('a'); dl.href = doc.content; dl.download = doc.name; document.body.appendChild(dl); dl.click(); document.body.removeChild(dl); }
+            };
+        }
+        function deleteDocument(id) { if(!confirm('Remove file?')) return; db.transaction(["documents"], "readwrite").objectStore("documents").delete(id).onsuccess = function() { loadStoredDocuments(); }; }
+
+        window.onload = function() { loadMilestones(); loadLogs(); };
+    </script>
+</body>
+</html>
